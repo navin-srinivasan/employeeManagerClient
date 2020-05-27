@@ -1,0 +1,42 @@
+
+<br>
+<div class="container">
+  <form #fetchForm="ngForm" (ngSubmit)="fetchRecord()">
+    <div class="row">
+      <div class="col-7">
+        <input type="text" class="form-control" placeholder="Employee Id" name="employeeId" [(ngModel)]="fetchId">
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-outline-primary">Fetch</button>
+      </div>
+      <div *ngIf="fetchAllFlag" class="col">
+        <button type="button" class="btn btn-outline-primary" (click)="getAllRecords()">Fetch ALL</button>
+      </div>
+    </div>
+  </form>
+</div>
+<br>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Mail</th>
+        <th scope="col">Department</th>
+        <th scope="col">Designation</th>
+        <th scope='col'></th>
+        <th scope='col'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of recordArray">
+        <td>{{record.employeeId}}</td>
+        <td>{{record.employeeName}}</td>
+        <td>{{record.employeeMail}}</td>
+        <td>{{record.designation}}</td>
+        <td>{{record.department}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

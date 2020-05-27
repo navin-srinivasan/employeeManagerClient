@@ -1,0 +1,132 @@
+
+<br>
+<div align="right">{{userBean.username}}<button type="button" class="btn btn-outline-primary btn-xs" (click)="logout()">Logout</button></div>
+<div class="container">
+  <form #fetchForm="ngForm" (ngSubmit)="fetchRecord()">
+    <div class="row">
+      <div class="col-7">
+        <input type="text" class="form-control" placeholder="Employee Id" name="emoyepleId" [(ngModel)]="fetchId">
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-outline-primary">Fetch</button>
+      </div>
+      <div *ngIf="fetchAllFlag" class="col">
+        <button type="button" class="btn btn-outline-primary" (click)="getAllRecords()">Fetch ALL</button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-outline-primary" (click)="createflag=true">Create new record</button>
+      </div>
+    </div>
+  </form>
+</div>
+<br>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Employee ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Mail</th>
+        <th scope="col">Department</th>
+        <th scope="col">Designation</th>
+        <th scope='col'></th>
+        <th scope='col'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of recordArray">
+        <td>{{record.employeeId}}</td>
+        <td>{{record.employeeName}}</td>
+        <td>{{record.employeeMail}}</td>
+        <td>{{record.designation}}</td>
+        <td>{{record.department}}</td>
+        <td><button type="button" class="btn btn-outline-warning btn btn-primary btn-sm"
+            (click)="updateBean = record; updateFlag = true;">Update</button></td>
+        <td><button type="button" class="btn btn-outline-danger btn btn-primary btn-sm"
+            (click)="deleteRecord(record.employeeId);">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container" *ngIf="createflag">
+  <h6>CREATE RECORD:-
+    <br></h6>
+  <form #createForm="ngForm" (ngSubmit)="createSubmit(createForm.value)">
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInput">Employee Id</label>
+        <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Employee Id" name="employeeId"
+          ngModel>
+      </div>
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInput">Name</label>
+        <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Name" name="employeeName"
+          ngModel>
+      </div>
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInputGroup">Mail</label>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">@</div>
+          </div>
+          <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Mail" name="employeeMail"
+            ngModel>
+        </div>
+      </div>
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInput">Department</label>
+        <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Department" name="department"
+          ngModel>
+      </div>
+      <div class="col-auto">
+        <label class="sr-only" for="inlineFormInput">Designation</label>
+        <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Designation" name="designation"
+          ngModel>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-outline-primary mb-2">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container" *ngIf="updateFlag">
+  <form #updateForm="ngForm" (ngSubmit)="updateSubmit()">
+    <h6>UPDATE RECORD :-
+      <br></h6>
+    <div class="form-group row">
+      <label for="inputid" class="col-sm-2 col-form-label">Employee Id</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputid" name="employeeId" [(ngModel)]="updateBean.employeeId">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputname" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputname" name="employeename"
+          [(ngModel)]="updateBean.employeeName">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputmail" class="col-sm-2 col-form-label">Mail</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputmail" name="employeeMail"
+          [(ngModel)]="updateBean.employeeMail">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputdesignation" class="col-sm-2 col-form-label">Designation</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputdesignation" name="designation"
+          [(ngModel)]="updateBean.designation">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputdepartment" class="col-sm-2 col-form-label">Department</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="inputdepartment" name="department"
+          [(ngModel)]="updateBean.department">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-outline-primary">Submit</button>
+  </form>
+</div>
